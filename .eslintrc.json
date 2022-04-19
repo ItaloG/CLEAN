@@ -3,8 +3,5 @@
  "parserOptions": {
      "project": "./tsconfig.json"
  },
- "rules": {
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "method-signature-style": "off"
- }
+ "allownullstrict": true
 }
