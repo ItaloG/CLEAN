@@ -19,7 +19,7 @@ describe('EmailValidator Adapter', () => {
     expect(isValid).toBe(false)
   })
 
-  test('Should return true if validator returns false', () => {
+  test('Should return true if validator returns true', () => {
     const sut = makeSut()
     const isValid = sut.isValid('valid_email@mail.com')
     expect(isValid).toBe(true)
