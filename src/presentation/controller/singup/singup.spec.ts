@@ -109,7 +109,7 @@ describe('SigUp Controller', () => {
     )
   })
 
-  test('Should return 400 if password confirmation  asyncfails', async () => {
+  test('Should return 400 if password confirmation fails', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
@@ -126,7 +126,7 @@ describe('SigUp Controller', () => {
     )
   })
 
-  test('Should return 400 if an invalid email is pr asyncovided', async () => {
+  test('Should return 400 if an invalid email is provided', async () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
     const httpRequest = {
@@ -142,7 +142,7 @@ describe('SigUp Controller', () => {
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
 
-  test('Should call EmailValidator with correct ema asyncil', async () => {
+  test('Should call EmailValidator with correct email', async () => {
     const { sut, emailValidatorStub } = makeSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
     const httpRequest = {
@@ -212,7 +212,7 @@ describe('SigUp Controller', () => {
     })
   })
 
-  test('Should return 200 if valid data is provided async', async () => {
+  test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
