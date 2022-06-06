@@ -4,3 +4,4 @@ coverage
 babel
 globalConfig.json
 *.txt
+data
