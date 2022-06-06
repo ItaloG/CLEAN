@@ -1,8 +1,15 @@
 import { Collection } from 'mongodb'
+import { AddAccountModel } from '../../../../domain/usecases/add-account'
 import { MongoHelper } from '../helper/mongo-helper'
 import { AccountMongoRepository } from './account'
 
 let accountCollection: Collection
+
+const makeFakeAccount = (): AddAccountModel => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password'
+})
 
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
@@ -24,11 +31,7 @@ describe('Account Mongo Repository', () => {
 
   test('should return an account on add success', async () => {
     const sut = makeSut()
-    const account = await sut.add({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
+    const account = await sut.add(makeFakeAccount())
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any_name')
@@ -38,11 +41,7 @@ describe('Account Mongo Repository', () => {
 
   test('should return an account on loadByEmail success', async () => {
     const sut = makeSut()
-    await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
+    await accountCollection.insertOne(makeFakeAccount())
     const account = await sut.loadByEmail('any_email@mail.com')
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
@@ -55,5 +54,16 @@ describe('Account Mongo Repository', () => {
     const sut = makeSut()
     const account = await sut.loadByEmail('any_email@mail.com')
     expect(account).toBeFalsy()
+  })
+
+  test('should update the account accessToken on updateAccessToken success', async () => {
+    const sut = makeSut()
+    const res = await accountCollection.insertOne(makeFakeAccount())
+    let accountById = await accountCollection.findOne({ _id: res.insertedId })
+    expect(accountById?.accessToken).toBeFalsy()
+    await sut.updateAccessToken(res.insertedId.toString(), 'any_token')
+    accountById = await accountCollection.findOne({ _id: res.insertedId })
+    expect(accountById).toBeTruthy()
+    expect(accountById?.accessToken).toBe('any_token')
   })
 })
