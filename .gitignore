@@ -5,3 +5,4 @@ babel
 globalConfig.json
 *.txt
 data
+.vscode
