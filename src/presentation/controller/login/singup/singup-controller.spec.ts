@@ -8,7 +8,7 @@ import {
   AuthenticationModel,
   HttpRequest,
   Validation
-} from './sigup-controller-protocols'
+} from './singup-controller-protocols'
 import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
 
 interface SutTypes {

@@ -3,7 +3,7 @@ import { SignUpController } from '../../../../presentation/controller/login/sing
 import { Controller } from '../../../../presentation/protocols'
 import { makeDbAddAccount } from '../../usecases/add-account/db-add-account-factory'
 import { makeDbAuthentication } from '../../usecases/authentication/db-authentication-factory'
-import { makeLogControllerDecorator } from '../../usecases/decoretor/log-controller-decorator-factory'
+import { makeLogControllerDecorator } from '../../usecases/decorator/log-controller-decorator-factory'
 import { makeSignUpValidation } from './signup-validation-factory'
 
 export const makeSignUpController = (): Controller => {
