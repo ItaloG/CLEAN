@@ -7,6 +7,10 @@ export const adaptRoute = (controller: Controller) => {
       body: req.body
     }
     const httpResponse = await controller.handle(httpRequest)
-    httpResponse.statusCode === 200 ? res.status(httpResponse.statusCode).json(httpResponse.body) : res.status(httpResponse.statusCode).json({ error: httpResponse.body.message })
+    httpResponse.statusCode >= 200 || httpResponse.statusCode <= 299
+      ? res.status(httpResponse.statusCode).json(httpResponse.body)
+      : res
+        .status(httpResponse.statusCode)
+        .json({ error: httpResponse.body.message })
   }
 }
