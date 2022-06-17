@@ -1,7 +1,7 @@
 import {
   Decrypter,
-  LoadAccountByToken,
   AccountModel,
+  LoadAccountByToken,
   LoadAccountByTokenRepository
 } from './db-load-account-by-token-protocols'
 
