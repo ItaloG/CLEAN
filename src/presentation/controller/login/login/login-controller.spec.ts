@@ -1,7 +1,7 @@
 import { LoginController } from './login-controller'
 import { Validation, Authentication, AuthenticationModel, HttpRequest, unauthorized, serverError, badRequest, MissingParamError } from './login-controller-protocols'
 
-interface SutTypes {
+type SutTypes = {
   sut: LoginController
   validationStub: Validation
   authenticationStub: Authentication

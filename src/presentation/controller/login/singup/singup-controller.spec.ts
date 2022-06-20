@@ -1,7 +1,7 @@
 import { SignUpController } from './signup-controller'
 import { AddAccount, Authentication, Validation, AccountModel, HttpRequest, AddAccountModel, AuthenticationModel, serverError, ServerError, forbidden, EmailInUseError, ok, MissingParamError, badRequest } from './singup-controller-protocols'
 
-interface SutTypes {
+type SutTypes = {
   sut: SignUpController
   addAccountStub: AddAccount
   authenticationStub: Authentication
