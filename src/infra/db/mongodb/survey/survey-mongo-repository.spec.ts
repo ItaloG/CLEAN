@@ -75,4 +75,13 @@ describe('Name of the group', () => {
       expect(surveys.length).toBe(0)
     })
   })
+
+  describe('loadById()', () => {
+    test('should load survey by id on success', async () => {
+      const res = await surveyCollection.insertOne(makeFakeSurvey())
+      const sut = makeSut()
+      const survey = await sut.loadById(res.insertedId.toString())
+      expect(survey).toBeTruthy()
+    })
+  })
 })
