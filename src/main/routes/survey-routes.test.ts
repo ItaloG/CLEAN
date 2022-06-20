@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken'
 import { Collection, ObjectId } from 'mongodb'
 import request from 'supertest'
-import { AddSurveyModel } from '@/domain/usecases/add-survey'
+import { AddSurveyModel } from '@/domain/usecases/survey/add-survey'
 import { MongoHelper } from '@/infra/db/mongodb/helper/mongo-helper'
 import app from '@/main/config/app'
 import env from '@/main/config/env'
