@@ -6,7 +6,8 @@ import {
   InvalidParamError,
   LoadSurveyBtId,
   SaveSurveyResult,
-  serverError
+  serverError,
+  ok
 } from './save-survey-result-controller-protocols'
 
 export class SaveSurveyResultController implements Controller {
@@ -24,17 +25,19 @@ export class SaveSurveyResultController implements Controller {
       const survey = await this.loadSurveyBtId.loadById(surveyId)
       if (survey) {
         const answers = survey.answers.map((a) => a.answer)
-        if (!answers.includes(answer)) { return forbidden(new InvalidParamError('answer')) }
-        await this.saveSurveyResult.save({
-          accountId,
-          answer,
-          surveyId,
-          date: new Date()
-        })
+        if (!answers.includes(answer)) {
+          return forbidden(new InvalidParamError('answer'))
+        }
       } else {
         return forbidden(new InvalidParamError('surveyId'))
       }
-      return null
+      const surveyResult = await this.saveSurveyResult.save({
+        accountId,
+        answer,
+        surveyId,
+        date: new Date()
+      })
+      return ok(surveyResult)
     } catch (error) {
       return serverError(error)
     }
