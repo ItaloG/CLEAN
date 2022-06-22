@@ -10,6 +10,7 @@
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:clear": "jest --clearCache",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",

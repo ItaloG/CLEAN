@@ -1,15 +1,9 @@
 import { Collection } from 'mongodb'
-import { AddAccountParams } from '@/domain/usecases/account/add-account'
 import { MongoHelper } from '@/infra/db/mongodb/helper/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository'
+import { mockAddAccountParams } from '@/domain/test'
 
 let accountCollection: Collection
-
-const makeFakeAccount = (): AddAccountParams => ({
-  name: 'any_name',
-  email: 'any_email@mail.com',
-  password: 'any_password'
-})
 
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
@@ -31,7 +25,7 @@ describe('Account Mongo Repository', () => {
   describe('add()', () => {
     test('should return an account on add success', async () => {
       const sut = makeSut()
-      const account = await sut.add(makeFakeAccount())
+      const account = await sut.add(mockAddAccountParams())
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
@@ -43,7 +37,7 @@ describe('Account Mongo Repository', () => {
   describe('loadByEmail()', () => {
     test('should return an account on loadByEmail success', async () => {
       const sut = makeSut()
-      await accountCollection.insertOne(makeFakeAccount())
+      await accountCollection.insertOne(mockAddAccountParams())
       const account = await sut.loadByEmail('any_email@mail.com')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
@@ -62,7 +56,7 @@ describe('Account Mongo Repository', () => {
   describe('updateAccessToken()', () => {
     test('should update the account accessToken on updateAccessToken success', async () => {
       const sut = makeSut()
-      const res = await accountCollection.insertOne(makeFakeAccount())
+      const res = await accountCollection.insertOne(mockAddAccountParams())
       let accountById = await accountCollection.findOne({ _id: res.insertedId })
       expect(accountById?.accessToken).toBeFalsy()
       await sut.updateAccessToken(res.insertedId.toString(), 'any_token')

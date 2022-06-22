@@ -5,6 +5,7 @@ import { AddSurveyParams } from '@/domain/usecases/survey/add-survey'
 import { MongoHelper } from '@/infra/db/mongodb/helper/mongo-helper'
 import app from '@/main/config/app'
 import env from '@/main/config/env'
+import { mockSurveyModel } from '@/domain/test'
 
 let surveyCollection: Collection
 let accountCollection: Collection
@@ -28,16 +29,6 @@ const generateAccessToken = async (): Promise<string> => {
 
   return accessToken
 }
-
-const makeFakeSurvey = (): any => ({
-  question: 'Question',
-  answers: [{
-    answer: 'Answer 1',
-    image: 'http://image-name.com'
-  }, {
-    answer: 'Answer 2'
-  }]
-})
 
 const makeFakeSurveys = (): AddSurveyParams[] => ([{
   question: 'any_question',
@@ -75,7 +66,7 @@ describe('Survey Routes', () => {
     test('should return 403 on add survey without accessToken', async () => {
       await request(app)
         .post('/api/surveys')
-        .send(makeFakeSurvey())
+        .send(mockSurveyModel())
         .expect(403)
     })
 
@@ -84,7 +75,7 @@ describe('Survey Routes', () => {
       await request(app)
         .post('/api/surveys')
         .set('x-access-token', accessToken)
-        .send(makeFakeSurvey())
+        .send(mockSurveyModel())
         .expect(204)
     })
   })
