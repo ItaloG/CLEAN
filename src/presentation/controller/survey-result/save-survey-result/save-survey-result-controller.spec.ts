@@ -3,7 +3,7 @@ import { SaveSurveyResultModel } from '@/domain/usecases/survey-result/save-surv
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import {
   HttpRequest,
-  LoadSurveyBtId,
+  LoadSurveyById,
   SurveyModel,
   forbidden,
   InvalidParamError,
@@ -43,8 +43,8 @@ const makeFakeSurveyResult = (): SurveyResultModel => ({
   answer: 'any_answer'
 })
 
-const makeLoadSurveyById = (): LoadSurveyBtId => {
-  class LoadSurveyByIdStub implements LoadSurveyBtId {
+const makeLoadSurveyById = (): LoadSurveyById => {
+  class LoadSurveyByIdStub implements LoadSurveyById {
     async loadById (id: string): Promise<SurveyModel> {
       return await new Promise((resolve) => resolve(makeFakeSurvey()))
     }
@@ -65,7 +65,7 @@ const makeSaveSurveyResult = (): SaveSurveyResult => {
 
 type SutTypes = {
   sut: SaveSurveyResultController
-  loadSurveyByIdStub: LoadSurveyBtId
+  loadSurveyByIdStub: LoadSurveyById
   saveSurveyResultStub: SaveSurveyResult
 }
 

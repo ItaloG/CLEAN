@@ -4,7 +4,7 @@ import {
   HttpRequest,
   HttpResponse,
   InvalidParamError,
-  LoadSurveyBtId,
+  LoadSurveyById,
   SaveSurveyResult,
   serverError,
   ok
@@ -12,7 +12,7 @@ import {
 
 export class SaveSurveyResultController implements Controller {
   constructor (
-    private readonly loadSurveyBtId: LoadSurveyBtId,
+    private readonly loadSurveyById: LoadSurveyById,
     private readonly saveSurveyResult: SaveSurveyResult
   ) {}
 
@@ -22,7 +22,7 @@ export class SaveSurveyResultController implements Controller {
       const { answer } = httpRequest.body
       const { accountId } = httpRequest
 
-      const survey = await this.loadSurveyBtId.loadById(surveyId)
+      const survey = await this.loadSurveyById.loadById(surveyId)
       if (survey) {
         const answers = survey.answers.map((a) => a.answer)
         if (!answers.includes(answer)) {
