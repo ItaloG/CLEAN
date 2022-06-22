@@ -1,5 +1,5 @@
 import { LoginController } from './login-controller'
-import { Validation, Authentication, AuthenticationModel, HttpRequest, unauthorized, serverError, badRequest, MissingParamError } from './login-controller-protocols'
+import { Validation, Authentication, AuthenticationParams, HttpRequest, unauthorized, serverError, badRequest, MissingParamError } from './login-controller-protocols'
 
 type SutTypes = {
   sut: LoginController
@@ -9,7 +9,7 @@ type SutTypes = {
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationParams): Promise<string> {
       return 'any_token'
     }
   }
