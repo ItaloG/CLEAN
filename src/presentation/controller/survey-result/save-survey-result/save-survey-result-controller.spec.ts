@@ -63,7 +63,7 @@ describe('SaveSurveyResult Controller', () => {
     const { sut, loadSurveyByIdStub } = makeSut()
     jest
       .spyOn(loadSurveyByIdStub, 'loadById')
-      .mockReturnValueOnce(new Promise((resolve) => resolve(null)))
+      .mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
@@ -73,7 +73,7 @@ describe('SaveSurveyResult Controller', () => {
     jest
       .spyOn(loadSurveyByIdStub, 'loadById')
       .mockReturnValueOnce(
-        new Promise((_resolve, reject) => reject(new Error()))
+        Promise.reject(new Error())
       )
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
@@ -109,7 +109,7 @@ describe('SaveSurveyResult Controller', () => {
     jest
       .spyOn(saveSurveyResultStub, 'save')
       .mockReturnValueOnce(
-        new Promise((_resolve, reject) => reject(new Error()))
+        Promise.reject(new Error())
       )
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
