@@ -8,6 +8,13 @@ export class QueryBuilder {
     return this
   }
 
+  sort (data: object): QueryBuilder {
+    this.query.push({
+      $sort: data
+    })
+    return this
+  }
+
   group (data: object): QueryBuilder {
     this.query.push({
       $group: data
