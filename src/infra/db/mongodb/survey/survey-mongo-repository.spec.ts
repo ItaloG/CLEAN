@@ -6,7 +6,7 @@ import { mockSurveyModel } from '@/domain/test'
 
 let surveyCollection: Collection
 
-const makeFakeSurveys = (): AddSurveyParams[] => ([{
+const mockAddSurveyParams = (): AddSurveyParams[] => ([{
   question: 'any_question',
   answers: [{
     image: 'any_image',
@@ -51,7 +51,7 @@ describe('Survey mongo Repository', () => {
 
   describe('loadAll()', () => {
     test('should load all surveys on success', async () => {
-      await surveyCollection.insertMany(makeFakeSurveys())
+      await surveyCollection.insertMany(mockAddSurveyParams())
       const sut = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(2)
