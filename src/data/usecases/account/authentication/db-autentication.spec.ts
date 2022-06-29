@@ -76,6 +76,13 @@ describe('DbAuthentication UseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
+  test('Should return a AuthenticationModel on success', async () => {
+    const { sut } = makeSut()
+    const { accessToken, name } = await sut.auth(mockAuthentication())
+    expect(accessToken).toEqual('any_token')
+    expect(name).toEqual('any_name')
+  })
+
   test('Should call UpdateAccessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
     const updateSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken')

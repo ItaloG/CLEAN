@@ -1,7 +1,7 @@
 import { mockAuthentication } from '@/presentation/test'
 import { mockValidation } from '@/validation/test'
 import { LoginController } from './login-controller'
-import { Validation, Authentication, HttpRequest, unauthorized, serverError, badRequest, MissingParamError } from './login-controller-protocols'
+import { Validation, Authentication, HttpRequest, unauthorized, serverError, badRequest, MissingParamError, ok } from './login-controller-protocols'
 
 type SutTypes = {
   sut: LoginController
@@ -37,7 +37,7 @@ describe('Login Controller', () => {
 
   test('Should return 401 if invalid credentials are provided', async () => {
     const { sut, authenticationStub } = makeSut()
-    jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(async () => await Promise.resolve(''))
+    jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(async () => await Promise.resolve(null))
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(unauthorized())
   })
@@ -49,6 +49,12 @@ describe('Login Controller', () => {
     })
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 if valid credentials are provided', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token', name: 'any_name' }))
   })
 
   test('Should call Validation with correct value', async () => {
