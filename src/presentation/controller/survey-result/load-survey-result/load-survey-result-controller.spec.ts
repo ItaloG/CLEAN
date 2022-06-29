@@ -5,6 +5,7 @@ import { mockSurveyResultModel, throwError } from '@/domain/test'
 import MockDate from 'mockdate'
 
 const mockRequest = (): HttpRequest => ({
+  accountId: 'any_account_id',
   params: {
     surveyId: 'any_id'
   }
@@ -61,7 +62,7 @@ describe('LoadSurveyResult Controller', () => {
     const { sut, loadSurveyResultStub } = makeSut()
     const loadSpy = jest.spyOn(loadSurveyResultStub, 'load')
     await sut.handle(mockRequest())
-    expect(loadSpy).toHaveBeenCalledWith('any_id')
+    expect(loadSpy).toHaveBeenCalledWith('any_id', 'any_account_id')
   })
 
   test('Should return 500 if LoadSurveyResult throws', async () => {
