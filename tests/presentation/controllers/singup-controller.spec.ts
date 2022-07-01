@@ -58,9 +58,9 @@ describe('SigUp Controller', () => {
     })
   })
 
-  test('Should return 403 if AddAccount returns null', async () => {
+  test('Should return 403 if AddAccount returns false', async () => {
     const { sut, addAccountStub } = makeSut()
-    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(null)
+    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(Promise.resolve(false))
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
