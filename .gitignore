@@ -6,4 +6,5 @@ globalConfig.json
 *.txt
 data
 !src/data
+!tests/data
 .vscode
