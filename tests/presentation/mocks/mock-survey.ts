@@ -1,4 +1,4 @@
-import { AddSurvey , LoadSurveyById , LoadSurveys } from '@/domain/usecases'
+import { AddSurvey , LoadSurveyById , LoadSurveys, CheckSurveyById } from '@/domain/usecases'
 import { SurveyModel } from '@/domain/models'
 import { mockSurveyModel, mockSurveyModels } from '@/tests/domain/mocks'
 
@@ -29,4 +29,14 @@ export const mockLoadSurveyById = (): LoadSurveyById => {
   }
 
   return new LoadSurveyByIdStub()
+}
+
+export const mockCheckSurveyById = (): CheckSurveyById => {
+  class CheckSurveyByIdStub implements CheckSurveyById {
+    async checkById (id: string): Promise<boolean> {
+      return true
+    }
+  }
+
+  return new CheckSurveyByIdStub()
 }
