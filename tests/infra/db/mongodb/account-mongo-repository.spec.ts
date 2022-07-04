@@ -50,6 +50,23 @@ describe('AccountMongoRepository', () => {
     })
   })
 
+  describe('checkByEmail()', () => {
+    test('Should return true if email is valid', async () => {
+      const sut = makeSut()
+      const addAccountParams = mockAddAccountParams()
+      await accountCollection.insertOne(addAccountParams)
+      const exists = await sut.checkByEmail(addAccountParams.email)
+      expect(exists).toBe(true)
+    })
+
+    test('Should return false if email is not valid', async () => {
+      const sut = makeSut()
+      jest.spyOn(sut, 'checkByEmail').mockReturnValueOnce(Promise.resolve(false))
+      const exists = await sut.checkByEmail('any_email@mail.com')
+      expect(exists).toBe(false)
+    })
+  })
+
   describe('updateAccessToken()', () => {
     test('should update the account accessToken on success', async () => {
       const sut = makeSut()
