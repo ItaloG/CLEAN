@@ -3,8 +3,8 @@ import { unauthorized, serverError, badRequest, ok } from '@/presentation/helper
 import { Validation } from '@/presentation/protocols'
 import { MissingParamError } from '@/presentation/errors'
 import { Authentication } from '@/domain/usecases'
-import { mockAuthentication , mockValidation } from '@/../tests/presentation/mocks'
-import { throwError } from '@/../tests/domain/mocks'
+import { mockAuthentication , mockValidation } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: LoginController

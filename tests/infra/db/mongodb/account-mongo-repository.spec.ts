@@ -1,5 +1,5 @@
 import { MongoHelper, AccountMongoRepository } from '@/infra/db'
-import { mockAddAccountParams } from '@/../tests/domain/mocks'
+import { mockAddAccountParams } from '@/tests/domain/mocks'
 import { Collection } from 'mongodb'
 
 let accountCollection: Collection

@@ -2,8 +2,8 @@ import { LoadSurveyResultController } from '@/presentation/controllers'
 import { forbidden, serverError, ok } from '@/presentation/helpers'
 import { InvalidParamError } from '@/presentation/errors'
 import { LoadSurveyById, LoadSurveyResult } from '@/domain/usecases'
-import { mockLoadSurveyById, mockLoadSurveyResult } from '@/../tests/presentation/mocks'
-import { mockSurveyResultModel, throwError } from '@/../tests/domain/mocks'
+import { mockLoadSurveyById, mockLoadSurveyResult } from '@/tests/presentation/mocks'
+import { mockSurveyResultModel, throwError } from '@/tests/domain/mocks'
 import MockDate from 'mockdate'
 
 const mockRequest = (): LoadSurveyResultController.Request => ({

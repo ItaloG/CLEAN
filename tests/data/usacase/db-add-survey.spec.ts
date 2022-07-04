@@ -1,7 +1,7 @@
 import { DbAddSurvey } from '@/data/usecases'
 import { AddSurveyRepository } from '@/data/protocols'
-import { mockAddSurveyParams, throwError } from '@/../tests/domain/mocks'
-import { mockAddSurveyRepository } from '@/../tests/data/mocks'
+import { mockAddSurveyParams, throwError } from '@/tests/domain/mocks'
+import { mockAddSurveyRepository } from '@/tests/data/mocks'
 import MockDate from 'mockdate'
 
 type SutTypes = {

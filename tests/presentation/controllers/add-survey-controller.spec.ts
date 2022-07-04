@@ -2,8 +2,8 @@ import { Validation } from '@/presentation/protocols'
 import { AddSurvey } from '@/domain/usecases'
 import { AddSurveyController } from '@/presentation/controllers'
 import { badRequest, serverError, noContent } from '@/presentation/helpers'
-import { mockValidation, mockAddSurvey } from '@/../tests/presentation/mocks'
-import { throwError } from '@/../tests/domain/mocks'
+import { mockValidation, mockAddSurvey } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 import MockDate from 'mockdate'
 
 const mockRequest = (): AddSurveyController.Request => ({

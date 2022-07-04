@@ -1,8 +1,8 @@
 import { LoadSurveysController } from '@/presentation/controllers'
 import { ok, serverError, noContent } from '@/presentation/helpers'
 import { LoadSurveys } from '@/domain/usecases'
-import { mockSurveyModels, throwError } from '@/../tests/domain/mocks'
-import { mockLoadSurveys } from '@/../tests/presentation/mocks'
+import { mockSurveyModels, throwError } from '@/tests/domain/mocks'
+import { mockLoadSurveys } from '@/tests/presentation/mocks'
 import MockDate from 'mockdate'
 
 const mockRequest = (): LoadSurveysController.Request => ({ accountId: 'any_account_id' })

@@ -3,8 +3,8 @@ import { MissingParamError, EmailInUseError, ServerError } from '@/presentation/
 import { Validation } from '@/presentation/protocols'
 import { serverError, ok, forbidden, badRequest } from '@/presentation/helpers'
 import { AddAccount, Authentication } from '@/domain/usecases'
-import { mockValidation, mockAuthentication, mockAddAccount } from '@/../tests/presentation/mocks'
-import { throwError } from '@/../tests/domain/mocks'
+import { mockValidation, mockAuthentication, mockAddAccount } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: SignUpController

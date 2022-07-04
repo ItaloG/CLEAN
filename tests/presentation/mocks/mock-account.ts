@@ -1,6 +1,6 @@
 import { AddAccount, Authentication, AuthenticationParams , LoadAccountByToken } from '@/domain/usecases'
 import { AccountModel , AuthenticationModel } from '@/domain/models'
-import { mockAccountModel } from '@/../tests/domain/mocks'
+import { mockAccountModel } from '@/tests/domain/mocks'
 
 export const mockAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {

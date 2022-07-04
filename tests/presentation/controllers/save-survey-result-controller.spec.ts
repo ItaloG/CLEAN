@@ -2,8 +2,8 @@ import { SaveSurveyResultController } from '@/presentation/controllers'
 import { InvalidParamError } from '@/presentation/errors'
 import { serverError, ok, forbidden } from '@/presentation/helpers'
 import { SaveSurveyResult , LoadSurveyById } from '@/domain/usecases'
-import { mockLoadSurveyById, mockSaveSurveyResult } from '@/../tests/presentation/mocks'
-import { mockSurveyResultModel, throwError } from '@/../tests/domain/mocks'
+import { mockLoadSurveyById, mockSaveSurveyResult } from '@/tests/presentation/mocks'
+import { mockSurveyResultModel, throwError } from '@/tests/domain/mocks'
 import MockDate from 'mockdate'
 
 const mockRequest = (answer: string = null): SaveSurveyResultController.Request => ({
