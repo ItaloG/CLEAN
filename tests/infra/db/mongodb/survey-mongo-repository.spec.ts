@@ -1,5 +1,5 @@
 import { SurveyMongoRepository, MongoHelper } from '@/infra/db'
-import { mockAddSurveyParams, mockAddAccountParams } from '@/tests/domain/mocks'
+import { mockAddSurveyParams, mockAddAccountParams, mockSurveyModel } from '@/tests/domain/mocks'
 import { Collection, ObjectId } from 'mongodb'
 // import FakeObjectId from 'bson-objectid'
 
@@ -82,6 +82,22 @@ describe('SurveyMongoRepository', () => {
       const survey = await sut.loadById(res.insertedId.toString())
       expect(survey).toBeTruthy()
       expect(survey.id).toBeTruthy()
+    })
+  })
+
+  describe('loadAnswers()', () => {
+    test('Should load answers on success', async () => {
+      const res = await surveyCollection.insertOne(mockAddSurveyParams())
+      const survey = mockSurveyModel()
+      const sut = makeSut()
+      const answers = await sut.loadAnswers(res.insertedId.toString())
+      expect(answers).toEqual([survey.answers[0].answer, survey.answers[1].answer])
+    })
+
+    test('Should return empty array if survey does not exists', async () => {
+      const sut = makeSut()
+      const answers = await sut.loadAnswers('62c31b708c603aa379901f63')
+      expect(answers).toEqual([])
     })
   })
 
