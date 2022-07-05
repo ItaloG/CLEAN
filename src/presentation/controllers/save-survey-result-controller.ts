@@ -11,7 +11,7 @@ export class SaveSurveyResultController implements Controller {
 
   async handle (request: SaveSurveyResultController.Request): Promise<HttpResponse> {
     try {
-      const { surveyId, answer, accountId } = request
+      const { surveyId, answer } = request
 
       const survey = await this.loadSurveyById.loadById(surveyId)
       if (survey) {
@@ -23,9 +23,7 @@ export class SaveSurveyResultController implements Controller {
         return forbidden(new InvalidParamError('surveyId'))
       }
       const surveyResult = await this.saveSurveyResult.save({
-        accountId,
-        answer,
-        surveyId,
+        ...request,
         date: new Date()
       })
       return ok(surveyResult)
