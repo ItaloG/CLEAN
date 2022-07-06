@@ -27,6 +27,7 @@ export default async (app: Express): Promise<void> => {
   const server = new ApolloServer({
     resolvers,
     typeDefs,
+    context: ({ req }) => ({ req }),
     plugins: [{
       requestDidStart: async () => ({
         willSendResponse: async ({ response, errors }) => handleErrors(response, errors)
