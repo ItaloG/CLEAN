@@ -4,6 +4,10 @@ import { Collection } from 'mongodb'
 
 let accountCollection: Collection
 
+const makeSut = (): AccountMongoRepository => {
+  return new AccountMongoRepository()
+}
+
 describe('AccountMongoRepository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -17,10 +21,6 @@ describe('AccountMongoRepository', () => {
     accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-
-  const makeSut = (): AccountMongoRepository => {
-    return new AccountMongoRepository()
-  }
 
   describe('add()', () => {
     test('should return an account on success', async () => {
